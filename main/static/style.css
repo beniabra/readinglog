@@ -1,0 +1,14 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container-fluid{
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+h1{
+    font-size: 100px;
+    font-weight: 900;
+}
+.pt-2{
+    padding-top: 70px;
+}

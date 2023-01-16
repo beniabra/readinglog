@@ -1,4 +1,5 @@
 {% load bootstrap3 %}
+{% load static %}
 {% bootstrap_css %}
 {% bootstrap_javascript %}
 <!DOCTYPE html>
@@ -7,10 +8,41 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <title>{% block title %}{% endblock %}</title>
+    <title>Reading Log | {% block title %}{% endblock %}</title>
 </head>
 <body>
+    <div class="container-fluid bg-primary text-center">
+        <h1>{% block header %}{% endblock %}</h1>
+    </div>
+    <div class="container">
+        <div class="row">
+        
+            <div class="col-md-2 col-md-push-10">Side
+                <div id="wrapper">
+                    <div id="sidebar-wrapper">
+                        <ul class="sidebar-nav ">
+                            <li><a href="#">Page 1</a></li>
+                            <li><a href="#">Page 1</a></li>
+                        </ul>
+                    </div>
+                </div><!--
+                <<nav class="navbar navbar-default navbar-fixed-side">
+                    <div class="container">
+                        <div class="navbar-collabse collabse in">
+                            <ul class="nav navbar-nav">
+                                <li><a href="#">Page 1</a></li>
+                                <li><a href="#">Page 1</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>>-->
+            </div>
+    
+            <div class="col-md-10 col-md-pull-2">Main content</div>
+        </div>
+    </div>
     
 </body>
 </html>
