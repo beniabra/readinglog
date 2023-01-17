@@ -18,31 +18,26 @@
     </div>
     <div class="container">
         <div class="row">
-        
-            <div class="col-md-2 col-md-push-10">Side
-                <div id="wrapper">
-                    <div id="sidebar-wrapper">
-                        <ul class="sidebar-nav ">
-                            <li><a href="#">Page 1</a></li>
-                            <li><a href="#">Page 1</a></li>
-                        </ul>
-                    </div>
-                </div><!--
-                <<nav class="navbar navbar-default navbar-fixed-side">
-                    <div class="container">
-                        <div class="navbar-collabse collabse in">
-                            <ul class="nav navbar-nav">
-                                <li><a href="#">Page 1</a></li>
-                                <li><a href="#">Page 1</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </nav>>-->
+            <div class="col-md-2 col-md-push-10">
+                <div class="container" style="width: 300px">
+                    <ul class="sidebar-nav well" >
+                        <h2 style="margin-left: 20px; margin-top: 20px; font-weight: 700; color: rgb(60,60,60);">Pages</h2>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'books' %}">Bookshelves</a></li>
+                        <li><a href="{% url 'stats' %}">Statistics</a></li>
+                    </ul>
+                </div>
             </div>
     
-            <div class="col-md-10 col-md-pull-2">Main content</div>
+            <div class="col-md-10 col-md-pull-2">
+                <div class="container">
+                    {% block content %}{% endblock %}
+                </div>
+            </div>
         </div>
     </div>
-    
+    <div class="footer">
+        <p>Created by Benita Abraham</p>
+    </div>
 </body>
 </html>
