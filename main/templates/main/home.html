@@ -1,4 +1,22 @@
 {% extends 'main/base.html' %}
+
 {% block title %}Home{% endblock %}
 {% block header %}Reading Log{% endblock %}
-{% block content %}Home page content{% endblock %}
+{% block content %}
+
+<h3>2023 Reading Progress</h3>
+<p>{{ books_finished }} out of {{ book_goal }} books</p>
+<div class="progress">
+    <div class="progress-bar" role="progressbar" aria-valuenow="50"
+    aria-valuemin="0" aria-valuemax="100" style="width: {{ percent }}%">
+      {{ percent }}%
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h6>{{ book_title }} by {{ book_author }}</h6>
+        </div>
+      </div>
+</div>
+{% endblock %}
