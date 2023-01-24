@@ -1,17 +1,13 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
 }
-.container-fluid{
-    padding-top: 70px;
-    padding-bottom: 70px;
-}
 .container{
     padding-top: 10px;
     padding-bottom: 10px;
 }
 h1{
-    font-size: 100px;
-    font-weight: 900;
+    font-size: 80px;
+    font-weight: 700;
 }
 .sidebar-nav {
     position: relative;
@@ -35,7 +31,6 @@ h1{
 }
 
 .footer{
-    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;

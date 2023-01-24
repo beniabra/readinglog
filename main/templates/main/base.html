@@ -13,7 +13,14 @@
     <title>Reading Log | {% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div class="container-fluid bg-primary text-center">
+    <nav class="navbar navbar-default" style="margin: 0px; border-color: darkgray; background-color: rgb(222, 222, 222);">
+        <div class="container-fluid" style="padding: 0px; padding-right: 15px;">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container-fluid bg-primary text-center" style="padding-top: 50px; padding-bottom: 50px;">
         <h1>{% block header %}{% endblock %}</h1>
     </div>
     <div class="container">

@@ -4,19 +4,12 @@ from .models import Bookshelf, Book
 import requests
 
 def home(response):
-    r = Bookshelf.objects.get(id=2)
-    """
-    url = 'https://www.googleapis.com/books/v1/volumes/lxGuDwAAQBAJ'
-    book = requests.get(url).json()
-    book_title = book["volumeInfo"]["title"]
-    book_author = book["volumeInfo"]["authors"][0]"""
+    f = Bookshelf.objects.get(id=1).book_set.all().count()
     results = {
-        "books_finished": 5,
+        "books_finished": f,
         "book_goal": 35,
-        "percent": round(5/35*100),
-        "bookshelf": r
-        #"book_title": book_title,
-        #"book_author": book_author
+        "percent": round(f/35*100),
+        "bookshelf": Bookshelf.objects.get(id=2),
     }
     return render(response, "main/home.html", results)
 

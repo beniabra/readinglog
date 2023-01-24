@@ -29,6 +29,7 @@ class Book(models.Model):
     start_date = models.DateField(null=True, blank=True)
     finish_date = models.DateField(null=True, blank=True)
     current_page = models.PositiveIntegerField(default=0, blank=True)
+    progress = models.PositiveIntegerField(default=0, blank=True)
     RATING_CHOICES = [
         (0.5, '0.5'),
         (1.0, '1'),
