@@ -6,8 +6,8 @@ body{
     padding-bottom: 10px;
 }
 h1{
-    font-size: 80px;
-    font-weight: 700;
+    font-size: 100px;
+    font-weight: 900;
 }
 .sidebar-nav {
     position: relative;
@@ -31,6 +31,7 @@ h1{
 }
 
 .footer{
+    position: static;
     left: 0;
     bottom: 0;
     width: 100%;
