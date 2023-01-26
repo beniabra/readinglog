@@ -5,10 +5,6 @@ body{
     padding-top: 10px;
     padding-bottom: 10px;
 }
-h1{
-    font-size: 100px;
-    font-weight: 900;
-}
 .sidebar-nav {
     position: relative;
     top: 0;

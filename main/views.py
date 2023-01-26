@@ -13,6 +13,9 @@ def home(response):
     }
     return render(response, "main/home.html", results)
 
+def view_book(response, id):
+    return render(response, "main/view.html", {"id": id})
+
 def books(response):
     return render(response, "main/books.html", {})
 

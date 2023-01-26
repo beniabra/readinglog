@@ -1,0 +1,27 @@
+{% extends 'main/base.html' %}
+{% load extract %}
+
+
+{% block title %}{% with data=id|extract_data %}{{ data.title }}{% endwith %}{% endblock %}
+{% block content %}
+{% with data=id|extract_data %}
+<div class="row">
+    <div class="col-lg-4">
+        <img src="{{ data.image }}" alt="thumbnail" style="height: 292px; width: 192px;">
+    </div>
+    <div class="col-lg-8">
+        <h1>{{ data.title }} <n></n></h1> 
+        <h1><small>{{ data.authors }}</small></h1>
+        <p><b>Published:</b> {{ data.pub_date }}</p>
+        <p><b>Publisher:</b> {{ data.publisher }}</p>
+        <p><b>Page Count:</b> {{ data.page_count }}</p>
+    </div>
+</div>
+<div class="row">
+    {% with html=data.desc|extract_html %}
+    {{ html }}
+    {% endwith %}
+</div>
+{% endwith %}
+{% endblock %}
+
