@@ -10,17 +10,27 @@
         <img src="{{ data.image }}" alt="thumbnail" style="height: 292px; width: 192px;">
     </div>
     <div class="col-lg-8">
-        <h1>{{ data.title }} <n></n></h1> 
+        <h1><b>{{ data.title }}</b></h1> 
         <h1><small>{{ data.authors }}</small></h1>
         <p><b>Published:</b> {{ data.pub_date }}</p>
         <p><b>Publisher:</b> {{ data.publisher }}</p>
         <p><b>Page Count:</b> {{ data.page_count }}</p>
+        <p><b>Average Rating:</b> 
+            <span class="glyphicon {% if data.avg_rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <span class="glyphicon {% if data.avg_rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <span class="glyphicon {% if data.avg_rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <span class="glyphicon {% if data.avg_rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <span class="glyphicon {% if data.avg_rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            ({{ data.avg_rating }}/5)
+        </p>
     </div>
 </div>
-<div class="row">
-    {% with html=data.desc|extract_html %}
-    {{ html }}
-    {% endwith %}
+<div class="row" style="padding-top: 10px">
+ 
+    <p><b>Description: </b>{% with html=data.desc|extract_html %}{{ html }} {% endwith %}</p>
+
+   
+    
 </div>
 {% endwith %}
 {% endblock %}
