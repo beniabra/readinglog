@@ -1,4 +1,27 @@
 {% extends 'main/base.html' %}
+{% load extract %}
 {% block title %}Bookshelves{% endblock %}
 {% block header %}Bookshelves{% endblock %}
-{% block content %}Bookshelf content{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="panel-group">
+        {% for shelf in shelves %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4><a href="{% url 'shelf' shelf.id %}">{{shelf.name}} </a><small> ({{shelf.book_set.all.count}})</small></h4>
+                {% for book in shelf.book_set.all %}
+                <div class="col-sm-3 text-center">
+                    {% with data=book.id|extract_data %}
+                    <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
+                        <div class="caption text-dark">
+                            <b><a href="{% url 'view' book.id %}" style="color: rgb(60,60,60)">{{data.title}}</a></b>
+                        </div>
+                    {% endwith %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

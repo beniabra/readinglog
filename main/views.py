@@ -17,7 +17,12 @@ def view_book(response, id):
     return render(response, "main/view.html", {"id": id})
 
 def books(response):
-    return render(response, "main/books.html", {})
+    shelves = Bookshelf.objects.all()
+    return render(response, "main/books.html", {"shelves": shelves})
+
+def shelf(response, id):
+    b = Bookshelf.objects.get(id=id)
+    return render(response, "main/shelf.html", {"shelf": b})
 
 def stats(response):
     return render(response, "main/stats.html", {})

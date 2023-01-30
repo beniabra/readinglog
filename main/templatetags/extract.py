@@ -15,7 +15,6 @@ def extract_data(id):
     publisher = book["volumeInfo"]["publisher"]
     pub_date = book["volumeInfo"]["publishedDate"]
     desc = book["volumeInfo"]["description"]
-    print(desc)
     page_count = book["volumeInfo"]["pageCount"]
     avg_rating = book["volumeInfo"]["averageRating"]
     image = book["volumeInfo"]["imageLinks"]["thumbnail"]
