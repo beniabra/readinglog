@@ -12,9 +12,9 @@
                 {% for book in shelf.book_set.all %}
                 <div class="col-sm-3 text-center">
                     {% with data=book.id|extract_data %}
-                    <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
+                    <a href="{% url 'view' book.id %}"><img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;"></a>
                         <div class="caption text-dark">
-                            <b><a href="{% url 'view' book.id %}" style="color: rgb(60,60,60)">{{data.title}}</a></b>
+                            <h5><b><a href="{% url 'view' book.id %}" style="color: rgb(60,60,60)">{{data.title}}</a></b></h5>
                         </div>
                     {% endwith %}
                 </div>
