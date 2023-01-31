@@ -14,7 +14,8 @@ def home(response):
     return render(response, "main/home.html", results)
 
 def view_book(response, id):
-    return render(response, "main/view.html", {"id": id})
+    book = Book.objects.get(id=id)
+    return render(response, "main/view.html", {"book": book})
 
 def books(response):
     shelves = Bookshelf.objects.all()

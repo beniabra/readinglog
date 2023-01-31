@@ -2,9 +2,9 @@
 {% load extract %}
 
 
-{% block title %}{% with data=id|extract_data %}{{ data.title }}{% endwith %}{% endblock %}
+{% block title %}{% with data=book.id|extract_data %}{{ data.title }}{% endwith %}{% endblock %}
 {% block content %}
-{% with data=id|extract_data %}
+{% with data=book.id|extract_data %}
 <div class="row">
     <div class="col-lg-4">
         <img src="{{ data.image }}" alt="thumbnail" style="height: 292px; width: 192px;">
@@ -28,8 +28,34 @@
 <div class="row" style="padding-top: 10px">
  
     <p><b>Description: </b>{% with html=data.desc|extract_html %}{{ html }} {% endwith %}</p>
-
-   
+    <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+        <h3><small>Status</small></h3>
+        <p>{% if book.dnfed %}DNF{% elif book.finished %}Finished{% elif book.started %}Started{% else %}To Read{% endif %}</p>
+    </div>
+    {% if book.started %}
+    <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+        <h3><small>Start Date</small></h3>
+        <p>{{ book.start_date }}</p>
+    </div>
+    {% endif %}
+    {% if book.dnfed or book.finished %}
+    <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+        <h3><small>Finish Date</small></h3>
+        <p>{{ book.finish_date }}</p>
+    </div>
+    {% endif %}
+    {% if book.started and book.finished != True %}
+    <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+        <h3><small>Progress</small></h3>
+        <p>{{ book.progress }}%</p>
+    </div>
+    {% endif%}
+    {% if book.finished %}
+    <div class="col-sm-3 text-center">
+        <h3><small>Read Time</small></h3>
+        <p>{{ book.finish_date|timesince:book.start_date }}</p>
+    </div>
+    {% endif %}
     
 </div>
 {% endwith %}
