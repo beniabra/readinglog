@@ -33,32 +33,41 @@
               </div>
             </div>
             <h6 class="text-right">{{book.progress}}%</h6>
-            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#changeLog">Log</button>
-              <div class="modal fade" id="changeLog" role="dialog">
+            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#changeLog{{book.id}}">Log</button>
+              <div class="modal fade" id="changeLog{{book.id}}" role="dialog">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
+                    <form method="post" action="log/{{book.id}}">
+                      {% csrf_token %}
                     <div class="modal-header">
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                       <h4>Current Log</h4>
                     </div>
                     <div class="modal-body">
-                      <div class="form-group">                        
-                        <label class="control-label col-sm-offset-2 col-sm-2" for="status">Status:</label>
-                        <div class="col-sm-6 col-md-4">
-                          <select id="status" class="form-control">
-                            <option {% if book.started != True %}selected{% endif %}>To Read</option>
-                            <option {% if book.started and book.finished != True %}selected{% endif %}>Started</option>
-                            <option {% if book.finished %}selected{% endif %}>Finished</option>
-                          </select> 
+                      {{form}}
+                      
+                        <div class="form-group">                        
+                          <label class="control-label col-sm-offset-2 col-sm-2" for="status">Status:</label>
+                          <div class="col-sm-6 col-md-4">
+                            <select id="status" class="form-control" name="status">
+                              <option {% if book.started != True %}selected{% endif %}>To Read</option>
+                              <option {% if book.started and book.finished != True %}selected{% endif %}>Started</option>
+                              <option {% if book.finished %}selected{% endif %}>Finished</option>
+                            </select> 
+                          </div>
                         </div>
-                      </div>
-                      <br>
-                      <h2></h2>
+                        <br>
+                        <div class="form-group">
+                          <label class="control-label col-sm-offset-2 col-sm-2" for="progresss">Progress:</label>
+                          <div class="col-sm-6 col-md-4"><input type="number" class="form-control" name="progress" value="{{book.progress}}"></div>
+                        </div>
+                        <br>                      
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" name="save", value="save" class="btn btn-default">Save</button>
                     </div>
+                    </form>
                   </div>
                 </div>
               </div>
