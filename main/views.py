@@ -12,6 +12,19 @@ def home(response):
         "bookshelf": Bookshelf.objects.get(id=2),
     }
     return render(response, "main/home.html", results)
+
+def search(response):
+    if response.method == "GET":
+        print(response.GET)
+        if response.GET.get("search"):
+            url = "https://www.googleapis.com/books/v1/volumes?q=" + response.GET.get("search").replace(" ", "+")
+            search_results = requests.get(url).json()
+            for result in search_results["items"]:
+                print(result["volumeInfo"]["title"])
+
+    return redirect(books)
+
+
 def log(response,id):
     if response.method == "POST":
         print(response.POST)
