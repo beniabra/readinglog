@@ -22,7 +22,7 @@ def search(response):
             for result in search_results["items"]:
                 print(result["volumeInfo"]["title"])
 
-    return redirect(books)
+    return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"]})
 
 
 def log(response,id):
@@ -52,8 +52,19 @@ def log(response,id):
     return redirect(home)
 
 def view_book(response, id):
-    book = Book.objects.get(id=id)
-    return render(response, "main/view.html", {"book": book})
+    added = False
+    try:
+        book = Book.objects.get(id=id)
+        added = True
+    except Book.DoesNotExist:
+        book = None
+        added = False
+    """
+    if(Book.objects.get(id=id)):
+        book = Book.objects.get(id=id)
+        added = True
+    """
+    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book})
 
 def books(response):
     shelves = Bookshelf.objects.all()

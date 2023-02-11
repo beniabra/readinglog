@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+{% load extract %}
+{% block title %}Search Results{% endblock %}
+{% block filler %}{{terms}}{% endblock %}
+{% block content %}
+<h2>Search Results</h2>
+<div class="panel-group">
+{% for result in results %}
+    {% with data=result.id|extract_data %}
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="col-lg-2 col-sm-3">
+                <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
+            </div>  
+            <div class="col-lg-10 col-sm-9">
+              <h3><b><a href="{% url 'view' result.id %}">{{data.title}}</a></b></h3> 
+              <p>{{data.authors}}</p> 
+            </div>
+        </div>
+    </div>
+    {% endwith %}
+{% endfor %}
+</div>
+{% endblock %}
