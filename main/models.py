@@ -15,7 +15,7 @@ class Bookshelf(models.Model):
         return self.name
 
 class Book(models.Model):
-    book = models.ForeignKey(Bookshelf, on_delete=models.CASCADE)
+    bookshelf = models.ManyToManyField(Bookshelf, related_name='book_set')
     id = models.CharField(max_length=12, primary_key=True)
     started = models.BooleanField(default=False, blank=True)
     finished = models.BooleanField(default=False, blank=True)

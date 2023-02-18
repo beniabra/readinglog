@@ -59,11 +59,6 @@ def view_book(response, id):
     except Book.DoesNotExist:
         book = None
         added = False
-    """
-    if(Book.objects.get(id=id)):
-        book = Book.objects.get(id=id)
-        added = True
-    """
     return render(response, "main/view.html", {"added": added, "book_id": id, "book": book})
 
 def books(response):
