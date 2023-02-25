@@ -69,8 +69,14 @@
                   </div>
                 </div>
               </div>
-            <button type="button" class="btn btn-success pull-right">Finish</button>
-            <button type="button" class="btn btn-danger pull-right" style="margin-right:10px">DNF</button>
+            <form method="post" style="margin: 0px" action="finish/{{book.id}}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-success pull-right" name="finish", value="finish">Finish</button>
+            </form>
+            <form method="post" style="margin: 0px" action="dnf/{{book.id}}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger pull-right" style="margin-right:10px" name="finish" value="finish">DNF</button>
+            </form>
           </div>
         {% endwith %}
       </div>

@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Bookshelf, Book
+from datetime import date
 import requests
+
 
 def home(response):
     f = Bookshelf.objects.get(id=1).book_set.all().count()
@@ -27,14 +29,12 @@ def search(response):
 
 def log(response,id):
     if response.method == "POST":
-        print(response.POST)
         b = Book.objects.get(id=id)
         if response.POST.get("save"):
             if int(response.POST.get('progress')) >= 100:
-                b.progress = 100
+                return redirect(finish, id=id)
             else:
                 b.progress = response.POST.get('progress')
-
             b.save()
             if response.POST.get('status') == 'To Read':
                 b.started = False
@@ -45,10 +45,45 @@ def log(response,id):
                 b.finished = False
                 b.dnfed = False
             elif response.POST.get('status') == 'Finished':
-                b.started = True
-                b.finished = True
-                b.dnfed = False
-        
+                return redirect(finish, id=id)
+            b.save()
+    return redirect(home)
+
+def finish(response, id):
+    if response.method == "POST":
+        b = Book.objects.get(id=id)
+        if(response.POST.get("finish")):
+            b.progress = 100
+            b.started = True
+            b.finished = True
+            b.dnfed = False
+            b.finish_date = date.today()
+            b.save()
+            s2 = Bookshelf.objects.get(name="Finished")
+            s2.book_set.add(b)
+            if Bookshelf.objects.get(name="Currently Reading").book_set.filter(id=id).exists():
+                s1 = Bookshelf.objects.get(name="Currently Reading")
+                s1.book_set.remove(b)
+            s1.save()
+            s2.save()
+    return redirect(view_book, id=id)
+
+def dnf(response, id):
+    if response.method == "POST":
+        b = Book.objects.get(id=id)
+        if(response.POST.get("dnf")):
+            b.started = True
+            b.finished = False
+            b.dnfed = True
+            b.finish_date = date.today()
+            b.save()
+            s2 = Bookshelf.objects.get(name="Did Not Finish")
+            s2.book_set.add(b)
+            if Bookshelf.objects.get(name="Currently Reading").book_set.filter(id=id).exists():
+                s1 = Bookshelf.objects.get(name="Currently Reading")
+                s1.book_set.remove(b)
+            s1.save()
+            s2.save()
     return redirect(home)
 
 def view_book(response, id):
