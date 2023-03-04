@@ -6,7 +6,7 @@ class Bookshelf(models.Model):
     date_created = models.DateField(auto_now=False, auto_now_add=True)
 
     class Meta:
-        ordering = ['-date_created']
+        ordering = ['date_created']
 
     def get_absolute_url(self):
         return reverse('model_detail_view', args=[str(self.id)])

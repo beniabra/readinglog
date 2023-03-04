@@ -13,8 +13,24 @@
                 <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
             </div>  
             <div class="col-lg-10 col-sm-9">
-              <h3><b><a href="{% url 'view' result.id %}">{{data.title}}</a></b></h3> 
-              <p>{{data.authors}}</p> 
+                <h3><b><a href="{% url 'view' result.id %}">{{data.title}}</a></b></h3> 
+                <p>{{data.authors}}</p> 
+                <form method="post" style="margin: 0px" action="../start/{{result.id}}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
+                </form>
+                <form method="post" style="margin: 0px" action="../addToBookshelf/{{result.id}}">
+                    {% csrf_token %}
+                    <div class="dropdown pull-right">
+                        <button class="btn btn-primary dropdown-toggle" type="submit" name="bookshelf" value="bookshelf" data-toggle="dropdown">Add to Bookshelf
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            {% for bookshelf in bookshelves %}
+                                <li><a href="{% url 'addToBookshelf' result.id bookshelf.id %}">{{bookshelf.name}}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

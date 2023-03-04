@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.middleware.csrf import get_token
 from django.http import HttpResponse
 from .models import Bookshelf, Book
 from datetime import date
@@ -17,17 +18,37 @@ def home(response):
 
 def search(response):
     if response.method == "GET":
-        print(response.GET)
         if response.GET.get("search"):
             url = "https://www.googleapis.com/books/v1/volumes?q=" + response.GET.get("search").replace(" ", "+")
             search_results = requests.get(url).json()
-            for result in search_results["items"]:
-                print(result["volumeInfo"]["title"])
 
-    return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"]})
+    return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"], "bookshelves": Bookshelf.objects.all()})
 
+def addToBookshelf(request, id, shelfId):
+    if not Book.objects.filter(id=id).exists():
+        Book.objects.create(id=id)
+    b = Book.objects.get(id=id)
+    s = Bookshelf.objects.get(id=shelfId)
+    if s.name == "Currently Reading":
+        pass
+        """
+        csrf_token = get_token(request)
+        r = requests.post('http://127.0.0.1:8000/start/'+id, data={'csrfmiddlewaretoken': csrf_token, 'start': True})
+        #csrf_token_html = '<input type="hidden" name="csrfmiddlewaretoken" value="{}" />'.format(csrf_token)
+        print(csrf_token)"""
+    elif s.name == "To Read":
+        pass
+    elif s.name == "Finished":
+        pass
+    elif s.name == "Did Not Finish":
+        pass
+    else:
+        pass
+
+    return redirect(view_book, id=id)
 
 def log(response,id):
+    print(response.POST)
     if response.method == "POST":
         b = Book.objects.get(id=id)
         if response.POST.get("save"):
@@ -49,6 +70,17 @@ def log(response,id):
             b.save()
     return redirect(home)
 
+def start(response, id):
+    if response.method == "POST":
+        if(response.POST.get("start")):
+            Book.objects.create(id=id, started = True, finished = False, dnfed = False, start_date = date.today())
+            b = Book.objects.get(id=id)
+            b.save()
+            s = Bookshelf.objects.get(name="Currently Reading")
+            s.book_set.add(b)
+            s.save()
+    return redirect(view_book, id=id)
+
 def finish(response, id):
     if response.method == "POST":
         b = Book.objects.get(id=id)
@@ -64,7 +96,7 @@ def finish(response, id):
             if Bookshelf.objects.get(name="Currently Reading").book_set.filter(id=id).exists():
                 s1 = Bookshelf.objects.get(name="Currently Reading")
                 s1.book_set.remove(b)
-            s1.save()
+                s1.save()
             s2.save()
     return redirect(view_book, id=id)
 
