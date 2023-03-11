@@ -24,31 +24,30 @@ def search(response):
 
     return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"], "bookshelves": Bookshelf.objects.all()})
 
-def addToBookshelf(request, id, shelfId):
-    if not Book.objects.filter(id=id).exists():
-        Book.objects.create(id=id)
-    b = Book.objects.get(id=id)
-    s = Bookshelf.objects.get(id=shelfId)
-    if s.name == "Currently Reading":
-        pass
-        """
-        csrf_token = get_token(request)
-        r = requests.post('http://127.0.0.1:8000/start/'+id, data={'csrfmiddlewaretoken': csrf_token, 'start': True})
-        #csrf_token_html = '<input type="hidden" name="csrfmiddlewaretoken" value="{}" />'.format(csrf_token)
-        print(csrf_token)"""
-    elif s.name == "To Read":
-        pass
-    elif s.name == "Finished":
-        pass
-    elif s.name == "Did Not Finish":
-        pass
-    else:
-        pass
-
+def addToBookshelf(response, id):
+    if response.method == "POST":
+        print(response.POST)
+        if not Book.objects.filter(id=id).exists():
+            Book.objects.create(id=id)
+        b = Book.objects.get(id=id)
+        print(int(response.POST.get("bookshelf")))
+        s = Bookshelf.objects.get(id=int(response.POST.get("bookshelf")))
+        if s.name == "Currently Reading":
+            pass
+        elif s.name == "To Read":
+            s.book_set.add(b)
+        elif s.name == "Finished":
+            pass
+        elif s.name == "Did Not Finish":
+            pass
+        else:
+            pass
     return redirect(view_book, id=id)
+    
+    
+   
 
 def log(response,id):
-    print(response.POST)
     if response.method == "POST":
         b = Book.objects.get(id=id)
         if response.POST.get("save"):

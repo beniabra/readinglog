@@ -12,5 +12,5 @@ urlpatterns = [
     path('finish/<str:id>', views.finish, name="finish"),
     path('dnf/<str:id>', views.dnf, name="dnf"),
     path('start/<str:id>', views.start, name="start"),
-    path('addToBookshelf/<str:id>/<int:shelfId>', views.addToBookshelf, name="addToBookshelf")
+    path('addToBookshelf/<str:id>', views.addToBookshelf, name="addToBookshelf")
 ]
