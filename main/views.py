@@ -90,12 +90,6 @@ def start(response, id):
         s2 = Bookshelf.objects.get(name="To Read")
         s2.book_set.remove(book)
         s2.save()
-    # if response.method == "POST":
-    #     if(response.POST.get("start")):
-    #         Book.objects.create(id=id, started = True, finished = False, dnfed = False, start_date = date.today())
-    #         b = Book.objects.get(id=id)
-    #         b.save()
-            
     return redirect(home)
 
 def finish(response, id):
@@ -118,12 +112,7 @@ def finish(response, id):
     if Bookshelf.objects.get(name="To Read").book_set.filter(id=book.id).exists():
         s2 = Bookshelf.objects.get(name="To Read")
         s2.book_set.remove(book)
-        s2.save()
-        
-    # if response.method == "POST":
-    #     b = Book.objects.get(id=id)
-    #     if(response.POST.get("finish")):
-            
+        s2.save()            
     return redirect(view_book, id=book.id)
 
 def dnf(response, id):
@@ -146,10 +135,6 @@ def dnf(response, id):
         s2 = Bookshelf.objects.get(name="To Read")
         s2.book_set.remove(book)
         s2.save()
-    # if response.method == "POST":
-    #     b = Book.objects.get(id=id)
-    #     if(response.POST.get("dnf")):
-            
     return redirect(home)
 
 def view_book(response, id):
