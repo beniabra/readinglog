@@ -69,13 +69,13 @@
                   </div>
                 </div>
               </div>
-            <form method="post" style="margin: 0px" action="finish/{{book.id}}">
+            <form method="post" style="margin: 0px" action="changeBookshelf/{{book.id}}">
               {% csrf_token %}
               <button type="submit" class="btn btn-success pull-right" name="finish", value="finish">Finish</button>
             </form>
-            <form method="post" style="margin: 0px" action="dnf/{{book.id}}">
+            <form method="post" style="margin: 0px" action="changeBookshelf/{{book.id}}">
               {% csrf_token %}
-              <button type="submit" class="btn btn-danger pull-right" style="margin-right:10px" name="finish" value="finish">DNF</button>
+              <button type="submit" class="btn btn-danger pull-right" style="margin-right:10px" name="dnf" value="dnf">DNF</button>
             </form>
           </div>
         {% endwith %}

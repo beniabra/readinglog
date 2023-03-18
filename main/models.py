@@ -42,7 +42,7 @@ class Book(models.Model):
     notes = models.TextField(blank=True)
 
     class Meta:
-        ordering = ['id']
+        ordering = ['-finish_date']
 
     def get_absolute_url(self):
         return reverse('model_detail_view', args=[str(self.id)])

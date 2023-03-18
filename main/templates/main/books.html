@@ -9,7 +9,7 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <h4><a href="{% url 'shelf' shelf.id %}">{{shelf.name}} </a><small> ({{shelf.book_set.all.count}})</small></h4>
-                {% for book in shelf.book_set.all %}
+                {% for book in shelf.book_set.all|slice:":4" %}
                 <div class="col-sm-3 text-center">
                     {% with data=book.id|extract_data %}
                     <a href="{% url 'view' book.id %}"><img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;"></a>
