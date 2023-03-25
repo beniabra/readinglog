@@ -62,7 +62,7 @@
         {% if book.finished %}
         <div class="col-sm-3 text-center">
             <h3><small>Read Time</small></h3>
-            <p>{{ book.finish_date|timesince:book.start_date }}</p>
+            <p>{{ book.start_date|timesince:book.finish_date }}</p>
         </div>
         {% endif %}
     {% endif %}
