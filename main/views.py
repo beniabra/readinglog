@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Bookshelf, Book
+from .forms import EditDetails
 from datetime import date
 import requests
 
@@ -145,7 +146,8 @@ def view_book(response, id):
     except Book.DoesNotExist:
         book = None
         added = False
-    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book})
+    form = EditDetails()
+    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book, "form": form})
 
 def books(response):
     shelves = Bookshelf.objects.all()
