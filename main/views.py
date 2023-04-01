@@ -45,6 +45,31 @@ def log(response,id):
             b.save()
     return redirect(home)
 
+def view_book(response, id):
+    added = False
+    try:
+        book = Book.objects.get(id=id)
+        added = True
+    except Book.DoesNotExist:
+        book = None
+        added = False
+    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book})
+
+def editDetails(response, id):
+    book = Book.objects.get(id=id)
+    if response.method == "POST":
+        print(response.POST)
+        if response.POST.get("startDate"):
+            book.start_date = response.POST.get("startDate")
+        if response.POST.get("finishDate"):
+            book.finish_date = response.POST.get("finishDate")
+        if response.POST.get("progress"):
+            print(book.progress)
+            book.progress = response.POST.get("progress")
+            print(book.progress)
+        book.save()
+    return redirect(view_book,id=id)
+
 def addToBookshelf(response, id):
     if response.method == "POST":
         print(response.POST)
@@ -138,16 +163,7 @@ def dnf(response, id):
         s2.save()
     return redirect(home)
 
-def view_book(response, id):
-    added = False
-    try:
-        book = Book.objects.get(id=id)
-        added = True
-    except Book.DoesNotExist:
-        book = None
-        added = False
-    form = EditDetails()
-    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book, "form": form})
+
 
 def books(response):
     shelves = Bookshelf.objects.all()

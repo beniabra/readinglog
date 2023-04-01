@@ -13,5 +13,6 @@ urlpatterns = [
     path('dnf/<str:id>', views.dnf, name="dnf"),
     path('start/<str:id>', views.start, name="start"),
     path('addToBookshelf/<str:id>', views.addToBookshelf, name="addToBookshelf"),
-    path('changeBookshelf/<str:id>', views.changeBookshelf, name="changeBookshelf")
+    path('changeBookshelf/<str:id>', views.changeBookshelf, name="changeBookshelf"),
+    path('editDetails/<str:id>', views.editDetails, name="editDetails")
 ]

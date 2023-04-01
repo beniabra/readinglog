@@ -30,29 +30,74 @@
                 <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
             </form>
             {% endif %}
+            {% if book.started and book.finished != True %}
+            <form method="post" style="margin: 0px" action="../changeBookshelf/{{book.id}}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" name="dnf", value="dnf">DNF</button>
+                <button type="submit" class="btn btn-success" name="finish", value="finish">Finish</button>
+            </form>
+            {% endif %}
+            
         {% endif %}
     </div>
 </div>
 <div class="row" style="padding-top: 10px">
- 
     <p><b>Description: </b>{% with html=data.desc|extract_html %}{{ html }} {% endwith %}</p>
+    {% if added %}
     <div class="row" style="margin: 0px; padding-right: 5px">
-        <p class="pull-right" data-toggle="modal" data-target="#edit"><a href="#">Edit</a></p>
+        <p class="pull-right" data-toggle="modal" data-target="#edit"><a>Edit</a></p>
         <div class="modal fade" id="edit" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
-                <form method="post" action="#">
+                <form method="post" action="../editDetails/{{book.id}}">
                     {% csrf_token %}
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
                   <h4 class="modal-title">Edit Details</h4>
                 </div>
                 <div class="modal-body">
-                  {{form}}
+                    <!--
+                    <div class="form-group">                        
+                        <label class="control-label col-sm-offset-2 col-sm-2" for="status">Status:</label>
+                        <div class="col-sm-6 col-md-4">
+                          <select id="status" class="form-control" name="status">
+                            <option {% if book.started != True %}selected{% endif %}>To Read</option>
+                            <option {% if book.started and book.finished != True %}selected{% endif %}>Started</option>
+                            <option {% if book.finished %}selected{% endif %}>Finished</option>
+                          </select> 
+                        </div>
+                    </div>-->
+                    <br>
+                    {% if book.started %}
+                    <div class="form-group">                        
+                        <label class="control-label col-sm-offset-2 col-sm-3" for="startDate">Start Date:</label>
+                        <div class="col-sm-6 col-md-4">
+                            <input type="date" id="startDate" name="startDate" value="{{ book.start_date|date:"Y-m-d" }}">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <br>
+                    <br>
+                    {% if book.dnfed or book.finished %}
+                    <div class="form-group">                        
+                        <label class="control-label col-sm-offset-2 col-sm-3" for="finishDate">Finish Date:</label>
+                        <div class="col-sm-6 col-md-4">
+                            <input type="date" id="finishDate" name="finishDate" value="{{ book.finish_date|date:"Y-m-d" }}">
+                        </div>
+                    </div>
+                    {% endif %}
+                    <br>
+                    {% if book.started and book.finished != True %}
+                    <div class="form-group">
+                        <label class="control-label col-sm-offset-2 col-sm-2" for="progresss">Progress:</label>
+                        <div class="col-sm-6 col-md-4"><input type="number" class="form-control" name="progress" value="{{book.progress}}"></div>
+                      </div>
+                    {% endif %}
+                    <br>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  <button type="submit" name="save", value="save" class="btn btn-default">Save</button>
+                  <button type="submit" name="edit", value="edit" class="btn btn-default">Save</button>
                 </div>
                 </form>
               </div>
@@ -60,7 +105,6 @@
           </div>
     </div>
     <div class="row">
-        {% if added %}
             <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
                 <h3><small>Status</small></h3>
                 <p>{% if book.dnfed %}DNF{% elif book.finished %}Finished{% elif book.started %}Started{% else %}To Read{% endif %}</p>
@@ -89,7 +133,7 @@
                 <p>{{ book.start_date|timesince:book.finish_date }}</p>
             </div>
             {% endif %}
-        {% endif %}
+    {% endif %}
     </div>
 </div>
 {% endwith %}
