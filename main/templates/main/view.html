@@ -71,7 +71,7 @@
                     {% if book.started %}
                     <div class="form-group">                        
                         <label class="control-label col-sm-offset-2 col-sm-3" for="startDate">Start Date:</label>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <input type="date" id="startDate" name="startDate" value="{{ book.start_date|date:"Y-m-d" }}">
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                     {% if book.dnfed or book.finished %}
                     <div class="form-group">                        
                         <label class="control-label col-sm-offset-2 col-sm-3" for="finishDate">Finish Date:</label>
-                        <div class="col-sm-6 col-md-4">
+                        <div class="col-sm-4 col-md-4">
                             <input type="date" id="finishDate" name="finishDate" value="{{ book.finish_date|date:"Y-m-d" }}">
                         </div>
                     </div>
@@ -89,8 +89,8 @@
                     <br>
                     {% if book.started and book.finished != True %}
                     <div class="form-group">
-                        <label class="control-label col-sm-offset-2 col-sm-2" for="progresss">Progress:</label>
-                        <div class="col-sm-6 col-md-4"><input type="number" class="form-control" name="progress" value="{{book.progress}}"></div>
+                        <label class="control-label col-sm-offset-2 col-sm-3" for="progress">Progress:</label>
+                        <div class="col-sm-4 col-md-4"><input type="number" class="form-control" style="width: 120px" name="progress" value="{{book.progress}}"></div>
                       </div>
                     {% endif %}
                     <br>

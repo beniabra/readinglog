@@ -12,9 +12,21 @@
           <div class="col-lg-2 col-sm-3">
               <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
           </div>  
-          <div class="col-lg-10 col-sm-9">
+          <div class="col-lg-8 col-sm-8">
             <h3><b><a href="{% url 'view' book.id %}">{{data.title}}</a></b></h3> 
             <p>{{data.authors}}</p> 
+          </div>
+          <div class="col-lg-2 col-sm-1">
+            {% if book.started %}
+            {% now "Y" as current_year %}
+              {% if book.finished %}
+                <h4 class="pull-right"><small>Finished: {{book.finish_date|date:"N j"}}{% if current_year != book.finish_date|date:"Y" %}, {{book.finish_date|date:"Y"}}{% endif %}</small></h4>
+              {% else %}
+              <h4 class="pull-right"><small>Started: {{book.start_date|date:"N j"}}{% if current_year != book.start_date|date:"Y" %}, {{book.start_date|date:"Y"}}{% endif %}</small></h4>
+              {% endif %}
+            {% endif %}
+            
+            
           </div>
         {% endwith %}
       </div>
