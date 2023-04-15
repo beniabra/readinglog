@@ -105,36 +105,85 @@
           </div>
     </div>
     <div class="row">
-            <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
-                <h3><small>Status</small></h3>
-                <p>{% if book.dnfed %}DNF{% elif book.finished %}Finished{% elif book.started %}Started{% else %}To Read{% endif %}</p>
-            </div>
-            {% if book.started %}
-            <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
-                <h3><small>Start Date</small></h3>
-                <p>{{ book.start_date }}</p>
-            </div>
-            {% endif %}
-            {% if book.dnfed or book.finished %}
-            <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
-                <h3><small>Finish Date</small></h3>
-                <p>{{ book.finish_date }}</p>
-            </div>
-            {% endif %}
-            {% if book.started and book.finished != True %}
-            <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
-                <h3><small>Progress</small></h3>
-                <p>{{ book.progress }}%</p>
-            </div>
-            {% endif%}
-            {% if book.finished %}
-            <div class="col-sm-3 text-center">
-                <h3><small>Read Time</small></h3>
-                <p>{{ book.start_date|timesince:book.finish_date }}</p>
-            </div>
-            {% endif %}
-    {% endif %}
+        <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+            <h3><small>Status</small></h3>
+            <p>{% if book.dnfed %}DNF{% elif book.finished %}Finished{% elif book.started %}Started{% else %}To Read{% endif %}</p>
+        </div>
+        {% if book.started %}
+        <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+            <h3><small>Start Date</small></h3>
+            <p>{{ book.start_date }}</p>
+        </div>
+        {% endif %}
+        {% if book.dnfed or book.finished %}
+        <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+            <h3><small>Finish Date</small></h3>
+            <p>{{ book.finish_date }}</p>
+        </div>
+        {% endif %}
+        {% if book.started and book.finished != True %}
+        <div class="col-sm-3 text-center" style="border-right-style: solid; border-right-width: 1px;">
+            <h3><small>Progress</small></h3>
+            <p>{{ book.progress }}%</p>
+        </div>
+        {% endif%}
+        {% if book.finished %}
+        <div class="col-sm-3 text-center">
+            <h3><small>Read Time</small></h3>
+            <p>{{ book.start_date|timesince:book.finish_date }}</p>
+        </div>
+        {% endif %}
     </div>
+    <div class="row">
+        <div class="container">
+        {% if book.finished %}
+            <p><b>My rating:</b></p>
+            <h1>
+                <span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            </h1>
+            <div class="modal fade" id="likes" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                        <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" name="likes", value="likes" class="btn btn-default">Save</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="likes">Likes:</label>
+                <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes" data-toggle="modal" data-target="#likes"></textarea>
+            </div>
+            <div class="modal fade" id="dislikes" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-body">
+                        <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" name="dislikes", value="dislikes" class="btn btn-default">Save</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dislikes">Dislikes:</label>
+                <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes" data-toggle="modal" data-target="#dislikes"></textarea>
+             </div>
+        {% endif %} 
+        </div>
+    </div>
+    {% endif %}
+
 </div>
 {% endwith %}
 {% endblock %}
