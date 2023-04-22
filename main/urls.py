@@ -14,5 +14,7 @@ urlpatterns = [
     path('start/<str:id>', views.start, name="start"),
     path('addToBookshelf/<str:id>', views.addToBookshelf, name="addToBookshelf"),
     path('changeBookshelf/<str:id>', views.changeBookshelf, name="changeBookshelf"),
-    path('editDetails/<str:id>', views.editDetails, name="editDetails")
+    path('editDetails/<str:id>', views.editDetails, name="editDetails"),
+    path('editLikes/<str:id>', views.editLikes, name="editLikes"),
+    path('editDislikes/<str:id>', views.editDislikes, name="editDislikes")
 ]

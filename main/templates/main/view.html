@@ -42,7 +42,11 @@
     </div>
 </div>
 <div class="row" style="padding-top: 10px">
-    <p><b>Description: </b>{% with html=data.desc|extract_html %}{{ html }} {% endwith %}</p>
+    {% autoescape off %}
+    <p style="display:inline"><b>Description: </b>{{ data.desc|slice:"0:500" }}</p>
+    <p class="collapse" id="collapseDesc">{{ data.desc|slice:"500:"}}</p>
+    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseDesc" aria-expanded="false" aria-controls="collapseExample">Collapse</a>
+    {% endautoescape %}
     {% if added %}
     <div class="row" style="margin: 0px; padding-right: 5px">
         <p class="pull-right" data-toggle="modal" data-target="#edit"><a>Edit</a></p>
@@ -148,13 +152,18 @@
             <div class="modal fade" id="likes" role="dialog">
                 <div class="modal-dialog">
                   <div class="modal-content">
+                    <form method="post" action="../editLikes/{{book.id}}">
+                        {% csrf_token %}
                     <div class="modal-body">
-                        <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes"></textarea>
+                        <div class="form-group">
+                            <textarea value="{{book.likes}}" class="form-control" rows="5" name="likes"></textarea>
+                        </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" name="likes", value="likes" class="btn btn-default">Save</button>
+                      <button type="submit" name="likes" class="btn btn-default">Save</button>
                     </div>
+                    </form>
                   </div>
                 </div>
             </div>
@@ -165,6 +174,8 @@
             <div class="modal fade" id="dislikes" role="dialog">
                 <div class="modal-dialog">
                   <div class="modal-content">
+                    <form method="post" action="../editDislikes/{{book.id}}">
+                        {% csrf_token %}
                     <div class="modal-body">
                         <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes"></textarea>
                     </div>
@@ -172,6 +183,7 @@
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       <button type="submit" name="dislikes", value="dislikes" class="btn btn-default">Save</button>
                     </div>
+                    </form>
                   </div>
                 </div>
             </div>

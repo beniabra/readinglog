@@ -70,6 +70,16 @@ def editDetails(response, id):
         book.save()
     return redirect(view_book,id=id)
 
+def editLikes(response, id):
+    if response.method == "POST":
+        print(response.POST)
+    return redirect(view_book, id=id)
+
+def editDislikes(response, id):
+    if response.method == "POST":
+        print(response.POST)
+    return redirect(view_book, id=id)
+
 def addToBookshelf(response, id):
     if response.method == "POST":
         print(response.POST)
