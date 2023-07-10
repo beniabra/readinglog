@@ -49,3 +49,7 @@ def extract_data(id):
 def extract_html(desc):
     soup = BeautifulSoup(desc, 'html.parser')
     return soup.getText()
+
+@register.filter
+def split(desc):
+    return desc.split('<br>')

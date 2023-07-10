@@ -84,4 +84,30 @@
     {% endfor %}
   </div>
 </div>
+<div class="row">
+  <h2>To Read</h2>
+  <div class="panel-group">
+    {% for book in to_read_bookshelf.book_set.all %}
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% with data=book.id|extract_data %}
+            <div class="col-lg-2 col-sm-3">
+                <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
+            </div>  
+            <div class="col-lg-8 col-sm-8">
+              <h3><b><a href="{% url 'view' book.id %}">{{data.title}}</a></b></h3> 
+              <p>{{data.authors}}</p>
+              {% if not book.started %}
+              <form method="post" style="margin: 0px" action="../changeBookshelf/{{book.id}}">
+                  {% csrf_token %}
+                  <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
+              </form>
+            {% endif %} 
+            </div>
+          {% endwith %}
+        </div>
+      </div>
+  {% endfor %}
+  </div>
+</div>
 {% endblock %}

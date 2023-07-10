@@ -12,6 +12,7 @@ def home(response):
         "book_goal": 35,
         "percent": round(f/35*100),
         "bookshelf": Bookshelf.objects.get(name="Currently Reading"),
+        "to_read_bookshelf": Bookshelf.objects.get(name="To Read")
     }
     return render(response, "main/home.html", results)
 
