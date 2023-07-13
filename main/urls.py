@@ -16,5 +16,6 @@ urlpatterns = [
     path('changeBookshelf/<str:id>', views.changeBookshelf, name="changeBookshelf"),
     path('editDetails/<str:id>', views.editDetails, name="editDetails"),
     path('editLikes/<str:id>', views.editLikes, name="editLikes"),
-    path('editDislikes/<str:id>', views.editDislikes, name="editDislikes")
+    path('editDislikes/<str:id>', views.editDislikes, name="editDislikes"),
+    path('removeBook/<int:shelf_id>/<str:book_id>', views.removeBook, name="removeBook")
 ]

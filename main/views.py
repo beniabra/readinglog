@@ -182,7 +182,17 @@ def books(response):
 
 def shelf(response, id):
     b = Bookshelf.objects.get(id=id)
-    return render(response, "main/shelf.html", {"shelf": b})
+    s_id = id
+    return render(response, "main/shelf.html", {"shelf": b, "shelf_id": s_id})
+
+def removeBook(response, shelf_id, book_id):
+    if response.method == "POST":
+        s = Bookshelf.objects.get(id=shelf_id)
+        b = Book.objects.get(id=book_id)
+        s.book_set.remove(b)
+        s.save()
+    return redirect(shelf,id=shelf_id)
+
 
 def stats(response):
     return render(response, "main/stats.html", {})
