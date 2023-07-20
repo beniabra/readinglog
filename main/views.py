@@ -71,9 +71,18 @@ def editDetails(response, id):
         book.save()
     return redirect(view_book,id=id)
 
-def editLikes(response, id):
+def editRating(response,id):
     if response.method == "POST":
         print(response.POST)
+        b = Book.objects.get(id=id)
+        if response.POST.get('rating'):
+            b.rating = float(response.POST.get('rating'))
+            b.save()
+    return redirect(view_book, id=id)
+
+def editLikes(response, id):
+    if response.method == "POST":
+        print(response.POST)  
     return redirect(view_book, id=id)
 
 def editDislikes(response, id):

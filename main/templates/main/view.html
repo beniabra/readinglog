@@ -143,11 +143,14 @@
         {% if book.finished %}
             <p><b>My rating:</b></p>
             <h1>
-                <span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <form method="post" action="{% url 'editRating' book.id %}"> 
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="1"><span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="2"><span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="3"><span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="4"><span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="5"><span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                </form>
             </h1>
             <div class="modal fade" id="likes" role="dialog">
                 <div class="modal-dialog">
