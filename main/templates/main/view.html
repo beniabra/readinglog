@@ -152,6 +152,18 @@
                     <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="5"><span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
                 </form>
             </h1>
+            <div class="row">
+                <div class="col-lg-6 form-group">
+                    <label for="likes">Likes:</label>
+                    <div class="well" style="background-color:whitesmoke;" data-toggle="modal" data-target="#likes">{{book.likes}}</div>
+                    <!-- <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes" data-toggle="modal" data-target="#likes"></textarea> -->
+                </div>
+                <div class="col-lg-6 form-group">
+                    <label for="dislikes">Dislikes:</label>
+                    <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#dislikes">{{book.dislikes}}</div>
+                    <!-- <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes" data-toggle="modal" data-target="#dislikes"></textarea> -->
+                </div>
+            </div>
             <div class="modal fade" id="likes" role="dialog">
                 <div class="modal-dialog">
                   <div class="modal-content">
@@ -159,41 +171,35 @@
                         {% csrf_token %}
                     <div class="modal-body">
                         <div class="form-group">
-                            <textarea value="{{book.likes}}" class="form-control" rows="5" name="likes"></textarea>
+                            <textarea class="form-control" rows="5" name="likes">{{book.likes}}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" name="likes" class="btn btn-default">Save</button>
+                      <button type="submit" name="likesButton" class="btn btn-default">Save</button>
                     </div>
                     </form>
                   </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="likes">Likes:</label>
-                <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes" data-toggle="modal" data-target="#likes"></textarea>
-            </div>
+           
             <div class="modal fade" id="dislikes" role="dialog">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <form method="post" action="../editDislikes/{{book.id}}">
                         {% csrf_token %}
                     <div class="modal-body">
-                        <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes"></textarea>
+                        <textarea class="form-control" rows="5" name="dislikes">{{book.dislikes}}</textarea>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" name="dislikes", value="dislikes" class="btn btn-default">Save</button>
+                      <button type="submit" name="dislikesButton" class="btn btn-default">Save</button>
                     </div>
                     </form>
                   </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="dislikes">Dislikes:</label>
-                <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes" data-toggle="modal" data-target="#dislikes"></textarea>
-             </div>
+            
         {% endif %} 
         </div>
     </div>
