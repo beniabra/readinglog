@@ -48,7 +48,11 @@
                     <ul class="sidebar-nav well" >
                         <h2 style="margin-left: 20px; margin-top: 20px; font-weight: 700; color: rgb(60,60,60);">Pages</h2>
                         <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'books' %}">Bookshelves</a></li>
+                        <li><a href="{% url 'books' %}">Bookshelves</a>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' 1 %}">Finished</a></li>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' 2 %}">Currently Reading</a></li>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' 3 %}">To Read</a></li>
+                        </li>
                         <li><a href="{% url 'stats' %}">Statistics</a></li>
                     </ul>
                 </div>
