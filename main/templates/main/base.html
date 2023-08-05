@@ -7,6 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'style.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
@@ -15,8 +16,10 @@
 </head>
 <body>
     
-    <div class="container-fluid bg-primary text-center" style="padding-top: 50px; padding-bottom: 50px;">
-        <h1 style="font-size: 100px; font-weight: 900;">{% block header %}{% endblock %}</h1>
+    <div class="jumbotron" style="margin: 0; background-color: #337ab7;">
+        <div class="container text-center">
+          <h1 style="color: white; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">{% block header %}{% endblock %}</h1>      
+        </div>
     </div>
     <nav class="navbar navbar-default" style="margin: 0px; border-color: darkgray; background-color: rgb(238, 238, 238);">
         

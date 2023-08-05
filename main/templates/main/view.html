@@ -45,7 +45,7 @@
     {% autoescape off %}
     <p style="display:inline;"><b>Description: </b>{{ data.desc|split|slice:"0:5"|join:'<br>' }}</p>
     <p class="collapse" id="collapseDesc">{{ data.desc|split|slice:"5:"|join:'<br>' }}</p>
-    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseDesc" aria-expanded="false" aria-controls="collapseExample">Collapse</a>
+    <a role="button" class="collapsed" data-toggle="collapse" href="#collapseDesc" aria-expanded="false" aria-controls="collapseExample">+/-</a>
     {% endautoescape %}
     {% if added %}
     <div class="row" style="margin: 0px; padding-right: 5px">
