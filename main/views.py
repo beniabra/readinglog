@@ -9,8 +9,8 @@ def home(response):
     f = Bookshelf.objects.get(name="Finished").book_set.all().count()
     results = {
         "books_finished": f,
-        "book_goal": 35,
-        "percent": round(f/35*100),
+        "book_goal": 50,
+        "percent": round(f/50*100),
         "bookshelf": Bookshelf.objects.get(name="Currently Reading"),
         "to_read_bookshelf": Bookshelf.objects.get(name="To Read")
     }
@@ -80,19 +80,13 @@ def editRating(response,id):
             b.save()
     return redirect(view_book, id=id)
 
-def editLikes(response, id):
+def editLikesDislikes(response, id):
     if response.method == "POST":
         print(response.POST)
         b = Book.objects.get(id=id)
         if response.POST.get('likes'):
             b.likes = response.POST.get('likes')
             b.save()
-    return redirect(view_book, id=id)
-
-def editDislikes(response, id):
-    if response.method == "POST":
-        print(response.POST)
-        b = Book.objects.get(id=id)
         if response.POST.get('dislikes'):
             b.dislikes = response.POST.get('dislikes')
             b.save()

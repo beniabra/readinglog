@@ -155,45 +155,33 @@
             <div class="row">
                 <div class="col-lg-6 form-group">
                     <label for="likes">Likes:</label>
-                    <div class="well" style="background-color:whitesmoke;" data-toggle="modal" data-target="#likes">{{book.likes}}</div>
-                    <!-- <textarea value="{{book.likes}}" class="form-control" rows="5" id="likes" data-toggle="modal" data-target="#likes"></textarea> -->
+                    <div class="well" style="background-color:whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{book.likes}}</div>
                 </div>
                 <div class="col-lg-6 form-group">
                     <label for="dislikes">Dislikes:</label>
-                    <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#dislikes">{{book.dislikes}}</div>
-                    <!-- <textarea value="{{book.dislikes}}" class="form-control" rows="5" id="dislikes" data-toggle="modal" data-target="#dislikes"></textarea> -->
+                    <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{book.dislikes}}</div>
                 </div>
             </div>
-            <div class="modal fade" id="likes" role="dialog">
-                <div class="modal-dialog">
+            <div class="modal fade" id="likesdislikes" role="dialog">
+                <div class="modal-dialog" style="width:1000px">
                   <div class="modal-content">
-                    <form method="post" action="../editLikes/{{book.id}}">
+                    <form method="post" action="../editLikesDislikes/{{book.id}}">
                         {% csrf_token %}
                     <div class="modal-body">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="5" name="likes">{{book.likes}}</textarea>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <label>Likes:</label>
+                                <textarea class="form-control" rows="5" name="likes">{{book.likes}}</textarea>
+                            </div>
+                            <div class="col-lg-6">
+                                <label>Dislikes:</label>
+                                <textarea class="form-control" rows="5" name="dislikes">{{book.dislikes}}</textarea>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                       <button type="submit" name="likesButton" class="btn btn-default">Save</button>
-                    </div>
-                    </form>
-                  </div>
-                </div>
-            </div>
-           
-            <div class="modal fade" id="dislikes" role="dialog">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <form method="post" action="../editDislikes/{{book.id}}">
-                        {% csrf_token %}
-                    <div class="modal-body">
-                        <textarea class="form-control" rows="5" name="dislikes">{{book.dislikes}}</textarea>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                      <button type="submit" name="dislikesButton" class="btn btn-default">Save</button>
                     </div>
                     </form>
                   </div>
