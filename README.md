@@ -16,6 +16,9 @@ This simple web page is for users who want to organize books they’ve read, are
 - [x] Log progress of books currently reading through home page
 ![LogScreen](https://user-images.githubusercontent.com/94129178/216779280-242634cf-582b-4b62-aa46-3f31c205eee2.gif)
 
+- [x] Edit reading details and add rating/notes
+![readinglogeditdetails](https://github.com/beniabra/readinglog/assets/94129178/193749c5-ff7c-4a72-b136-4ea2ec1f98f9)
+
 
 ## Built with...
 - Django
@@ -25,7 +28,7 @@ This simple web page is for users who want to organize books they’ve read, are
 - CSS
 
 ## Roadmap
-- [ ] Let users edit reading details
 - [ ] Allow users to create new custom bookshelves
 - [ ] Add a filter feature on the bookshelves page
+- [ ] Add login/logout capability
 - [ ] Create a statistics page where users can see what their reading is like
