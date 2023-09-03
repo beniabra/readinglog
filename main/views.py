@@ -84,12 +84,12 @@ def editLikesDislikes(response, id):
     if response.method == "POST":
         print(response.POST)
         b = Book.objects.get(id=id)
-        if response.POST.get('likes'):
-            b.likes = response.POST.get('likes')
-            b.save()
-        if response.POST.get('dislikes'):
-            b.dislikes = response.POST.get('dislikes')
-            b.save()
+        # if response.POST.get('likes'):
+        b.likes = response.POST.get('likes')
+        # b.save()
+        # if response.POST.get('dislikes'):
+        b.dislikes = response.POST.get('dislikes')
+        b.save()
     return redirect(view_book, id=id)
 
 def addToBookshelf(response, id):

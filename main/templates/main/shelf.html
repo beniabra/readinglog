@@ -16,7 +16,7 @@
             <h3><b><a href="{% url 'view' book.id %}">{{data.title}}</a></b></h3> 
             <p>{{data.authors}}</p>
             {% if not book.started %}
-              <form method="post" style="margin: 0px" action="../changeBookshelf/{{book.id}}">
+              <form method="post" style="margin: 0px" action="{% url 'changeBookshelf' book.id %}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
               </form>

@@ -155,11 +155,11 @@
             <div class="row">
                 <div class="col-lg-6 form-group">
                     <label for="likes">Likes:</label>
-                    <div class="well" style="background-color:whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{book.likes}}</div>
+                    <div class="well" style="background-color:whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{ book.likes|default:"I liked..." }}</div>
                 </div>
                 <div class="col-lg-6 form-group">
                     <label for="dislikes">Dislikes:</label>
-                    <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{book.dislikes}}</div>
+                    <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#likesdislikes">{{ book.dislikes|default:"I didn't like..." }}</div>
                 </div>
             </div>
             <div class="modal fade" id="likesdislikes" role="dialog">
