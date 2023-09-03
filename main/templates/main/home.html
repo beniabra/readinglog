@@ -63,7 +63,7 @@
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                      <button type="submit" name="save", value="save" class="btn btn-default">Save</button>
+                      <button type="submit" name="save" value="save" class="btn btn-default">Save</button>
                     </div>
                     </form>
                   </div>
@@ -73,10 +73,27 @@
               {% csrf_token %}
               <button type="submit" class="btn btn-success pull-right" name="finish", value="finish">Finish</button>
             </form>
-            <form method="post" style="margin: 0px" action="changeBookshelf/{{book.id}}">
-              {% csrf_token %}
-              <button type="submit" class="btn btn-danger pull-right" style="margin-right:10px" name="dnf" value="dnf">DNF</button>
-            </form>
+            
+              <button type="button" class="btn btn-danger pull-right" style="margin-right:10px" data-toggle="modal" data-target="#dnf{{book.id}}" name="dnf" value="dnf">DNF</button>
+              <div class="modal fade" id="dnf{{book.id}}" role="dialog">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <form method="post" style="margin: 0px" action="changeBookshelf/{{book.id}}">
+                      {% csrf_token %}
+                      <div class="modal-body">
+                        <p>Are you sure you want to DNF this book?</p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger" name="dnf" value="dnf">DNF</button>
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+           
           </div>
         {% endwith %}
       </div>
