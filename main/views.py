@@ -191,10 +191,14 @@ def books(response):
     shelves = Bookshelf.objects.all()
     return render(response, "main/books.html", {"shelves": shelves})
 
-def shelf(response, id):
-    b = Bookshelf.objects.get(id=id)
+def shelf(response, id, page):
+    s = Bookshelf.objects.get(id=id)
+    num = 15
+    pages = int(s.book_set.count() / num)
+    if s.book_set.count() % num > 0:
+        pages += 1
     s_id = id
-    return render(response, "main/shelf.html", {"shelf": b, "shelf_id": s_id})
+    return render(response, "main/shelf.html", {"shelf": s, "shelf_id": s_id, "pages": range(pages), "currPage": page})
 
 def removeBook(response, shelf_id, book_id):
     if response.method == "POST":

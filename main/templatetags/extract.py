@@ -53,3 +53,8 @@ def extract_html(desc):
 @register.filter
 def split(desc):
     return desc.split('<br>')
+
+@register.filter
+def paginate(bookList, arg):
+    num = 15
+    return bookList[arg * num - num:arg * num]
