@@ -51,10 +51,12 @@ def view_book(response, id):
     try:
         book = Book.objects.get(id=id)
         added = True
+        bookshelves = book.bookshelf.all()
     except Book.DoesNotExist:
         book = None
         added = False
-    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book})
+        bookshelves = None
+    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book, "bookshelves": bookshelves})
 
 def editDetails(response, id):
     book = Book.objects.get(id=id)
@@ -123,6 +125,13 @@ def changeBookshelf(response, id):
             return redirect(dnf, id=id)
     return redirect(view_book, id=id)
 
+def removeBook(response, shelf_id, book_id):
+    if response.method == "POST":
+        s = Bookshelf.objects.get(id=shelf_id)
+        b = Book.objects.get(id=book_id)
+        s.book_set.remove(b)
+        s.save()
+    return redirect(shelf,id=shelf_id, page=1)
 
 def start(response, id):
     book = Book.objects.get(id=id)
@@ -200,13 +209,6 @@ def shelf(response, id, page):
     s_id = id
     return render(response, "main/shelf.html", {"shelf": s, "shelf_id": s_id, "pages": range(pages), "currPage": page})
 
-def removeBook(response, shelf_id, book_id):
-    if response.method == "POST":
-        s = Bookshelf.objects.get(id=shelf_id)
-        b = Book.objects.get(id=book_id)
-        s.book_set.remove(b)
-        s.save()
-    return redirect(shelf,id=shelf_id)
 
 
 def stats(response):

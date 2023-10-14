@@ -11,7 +11,14 @@
     </div>
     <div class="col-lg-8">
         <h1><b>{{ data.title }}</b></h1> 
-        <h1><small>{{ data.authors }}</small></h1>
+        <h1 style="margin-top: 10px;"><small>{{ data.authors }}</small></h1>
+        {% if added %}
+            {% for bookshelf in bookshelves %}                 
+            <h4><span style='padding: 5px' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
+                <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
+            </span></h4>
+            {% endfor %}
+        {% endif %}
         <p><b>Published:</b> {{ data.pub_date }}</p>
         <p><b>Publisher:</b> {{ data.publisher }}</p>
         <p><b>Page Count:</b> {{ data.page_count }}</p>
@@ -30,7 +37,7 @@
                 <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
             </form>
             {% endif %}
-            {% if book.started and book.finished != True %}
+            {% if book.started and book.finished != True and book.dnfed != True %}
             <form method="post" style="margin: 0px" action="../changeBookshelf/{{book.id}}">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger" name="dnf", value="dnf">DNF</button>
