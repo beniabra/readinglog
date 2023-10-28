@@ -21,8 +21,9 @@ def search(response):
         if response.GET.get("search"):
             url = "https://www.googleapis.com/books/v1/volumes?q=" + response.GET.get("search").replace(" ", "+")
             search_results = requests.get(url).json()
+            all_books = Bookshelf.objects.all()
 
-    return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"], "bookshelves": Bookshelf.objects.all()})
+    return render(response, "main/search.html", {"terms":response.GET.get("search"), "results":search_results["items"], "bookshelves": Bookshelf.objects.all(), "book_ids":  list(Book.objects.values_list("id",flat=True)), "all_books": Book.objects.all()})
 
 def log(response,id):
     if response.method == "POST":
