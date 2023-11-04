@@ -11,6 +11,7 @@ def home(response):
         "books_finished": f,
         "book_goal": 50,
         "percent": round(f/50*100),
+        "recently_finished": Bookshelf.objects.get(name="Finished").book_set.all().latest("finish_date"),
         "bookshelf": Bookshelf.objects.get(name="Currently Reading"),
         "to_read_bookshelf": Bookshelf.objects.get(name="To Read")
     }

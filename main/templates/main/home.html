@@ -17,6 +17,32 @@
 <div class="row">
   <h2>Currently Reading</h2>
   <div class="panel-group">
+    {% if not bookshelf.book_set.all %}
+      <p><i>Nothing for now!</i></p>
+      <h2>Latest Finished</h2>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          {% with data=recently_finished.id|extract_data %}
+            <div class="col-lg-2 col-sm-3">
+                <img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
+            </div>  
+            <div class="col-lg-8 col-sm-8">
+              <h3><b><a href="{% url 'view' recently_finished.id %}">{{data.title}}</a></b></h3> 
+              <p>{{data.authors}}</p>
+              {% if recently_finished.finished %}
+                <span class="glyphicon {% if recently_finished.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if recently_finished.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if recently_finished.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if recently_finished.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <span class="glyphicon {% if recently_finished.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+              {% endif %}
+            </div>
+            
+          {% endwith %}
+
+        </div>
+      </div>
+    {% endif %}
     {% for book in bookshelf.book_set.all %}
     <div class="panel panel-default">
       <div class="panel-body">
@@ -104,6 +130,9 @@
 <div class="row">
   <h2>To Read</h2>
   <div class="panel-group">
+    {% if not to_read_bookshelf.book_set.all %}
+      <p><i>Nothing to see here!</i></p>
+    {% endif %}
     {% for book in to_read_bookshelf.book_set.all %}
       <div class="panel panel-default">
         <div class="panel-body">
