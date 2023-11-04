@@ -17,22 +17,17 @@
                 <h3><b><a href="{% url 'view' result.id %}">{{data.title}}</a></b></h3> 
                 <p>{{data.authors}}</p> 
                 <div class="col-lg-8">
-                    {% if result.id in book_ids %} 
+                {% if result.id in book_ids %} 
                         {% for book in all_books %}
                             {% if book.id == result.id %}
                                 {% for bookshelf in book.bookshelf.all %}
-                                <h4><span style='padding: 5px' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
+                                <span style='padding: 5px; margin-right: 5px; font-size: small;' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
                                     <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
-                                </span></h4>
+                                </span>
                                 {% endfor %}
                             {% endif %}
                         {% endfor %}
-                    <!-- {% else %}
-                        <form method="post" style="margin: 0px" action="../changeBookshelf/{{result.id}}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-info" name="start", value="start">Start</button>
-                        </form>
-                    {% endif %} -->
+                {% else %}
                 </div>
                 <div class="col-lg-4">
                     <form method="post" style="margin: 0px" action="../addToBookshelf/{{result.id}}">
@@ -50,7 +45,7 @@
                         <button class="btn btn-primary" name="add", value="add" type="submit">Add To Bookshelf</button>                    
                     </form>
                 </div>
-                
+                {% endif %}
                 
             </div>
             

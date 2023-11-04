@@ -14,12 +14,12 @@
         <h1 style="margin-top: 10px;"><small>{{ data.authors }}</small></h1>
         {% if added %}
             {% for bookshelf in bookshelves %}                 
-            <h4><span style='padding: 5px' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
+            <span style='padding: 5px; margin-right: 5px; font-size: small;' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
                 <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
-            </span></h4>
+            </span>
             {% endfor %}
         {% endif %}
-        <p><b>Published:</b> {{ data.pub_date }}</p>
+        <p style="padding-top: 10px;"><b>Published:</b> {{ data.pub_date }}</p>
         <p><b>Publisher:</b> {{ data.publisher }}</p>
         <p><b>Page Count:</b> {{ data.page_count }}</p>
         <p><b>Average Rating:</b> 
