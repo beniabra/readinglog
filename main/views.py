@@ -88,10 +88,7 @@ def editLikesDislikes(response, id):
     if response.method == "POST":
         print(response.POST)
         b = Book.objects.get(id=id)
-        # if response.POST.get('likes'):
         b.likes = response.POST.get('likes')
-        # b.save()
-        # if response.POST.get('dislikes'):
         b.dislikes = response.POST.get('dislikes')
         b.save()
     return redirect(view_book, id=id)
@@ -102,7 +99,6 @@ def addToBookshelf(response, id):
         if not Book.objects.filter(id=id).exists():
             Book.objects.create(id=id)
         b = Book.objects.get(id=id)
-        print(int(response.POST.get("bookshelf")))
         s = Bookshelf.objects.get(id=int(response.POST.get("bookshelf")))
         if s.name == "Currently Reading":
             return redirect(start, id=id)
@@ -211,6 +207,8 @@ def shelf(response, id, page):
     s_id = id
     return render(response, "main/shelf.html", {"shelf": s, "shelf_id": s_id, "pages": range(pages), "currPage": page})
 
+def shelfSort(response, id, page, sort):
+    pass
 
 
 def stats(response):
