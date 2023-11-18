@@ -17,6 +17,8 @@ class Bookshelf(models.Model):
 class Book(models.Model):
     bookshelf = models.ManyToManyField(Bookshelf, related_name='book_set')
     id = models.CharField(max_length=12, primary_key=True)
+    title = models.CharField(max_length=100, default=False, blank=True)
+    author = models.CharField(max_length=100, default=False, blank=True)
     started = models.BooleanField(default=False, blank=True)
     finished = models.BooleanField(default=False, blank=True)
     dnfed = models.BooleanField(default=False, blank=True)
@@ -52,6 +54,7 @@ class Book(models.Model):
 
     def get_fields(self):
         print("id: " + str(self.id))
+        print("title: " + str(self.title) + " | author: " + str(self.author))
         print("started: " + str(self.started) + " | finished: " + str(self.finished) + " | dnfed: " + str(self.dnfed))
         print("start date: " + str(self.start_date) + " | finish date: " + str(self.finish_date))
         print("current page: " + str(self.current_page) + " | progress: " + str(self.progress))

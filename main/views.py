@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import Bookshelf, Book
 from .forms import EditDetails
+from .requests import setTitleAndAuthor
 from datetime import date
 import requests
 
@@ -98,6 +99,7 @@ def addToBookshelf(response, id):
         print(response.POST)
         if not Book.objects.filter(id=id).exists():
             Book.objects.create(id=id)
+            setTitleAndAuthor(id)
         b = Book.objects.get(id=id)
         s = Bookshelf.objects.get(id=int(response.POST.get("bookshelf")))
         if s.name == "Currently Reading":
