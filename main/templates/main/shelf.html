@@ -4,22 +4,22 @@
 {% block header %}{% endblock %}
 {% block content %}
 <div class="row">
-    <h3>{{shelf.name}} <small> ({{shelf.book_set.all.count}})</small></h3>
+    <h3>{{shelf.name}} <small> ({{books.count}})</small></h3>
     <div class="row" style="margin-right: 10px;">
     <div class="dropdown pull-right" style="padding-bottom: 10px;">
       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort By
       <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="#">Title</a></li>
-        <li><a href="#">Author</a></li>
-        <li><a href="#">Rating</a></li>
+        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Title</a></li>
+        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Author</a></li>
         {% if shelf.name == "Finished" %}
-        <li><a href="#">Start Date</a></li>
-        <li><a href="#">Finish Date</a></li>
+        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Rating</a></li>
+        <li><a href="{% url 'shelf' id=1 page=1 sort='start_date' %}">Start Date</a></li>
+        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Finish Date</a></li>
         {% endif %}
       </ul>
     </div></div>
-    {% for book in shelf.book_set.all|paginate:currPage %} 
+    {% for book in books|paginate:currPage %} 
     <div class="panel panel-default">
       <div class="panel-body">
         {% with data=book.id|extract_data %}
@@ -88,7 +88,7 @@
     {% endfor %}
     <ul class="pagination">
       {% for page in pages %}
-      <li {% if forloop.counter == currPage %} class="active" {% endif %}><a href="{% url 'shelf' id=shelf.id page=forloop.counter %}">{{forloop.counter}}</a></li>
+      <li {% if forloop.counter == currPage %} class="active" {% endif %}><a href="{% url 'shelf' id=shelf.id page=forloop.counter sort='finish_date' %}">{{forloop.counter}}</a></li>
       {% endfor %}
     </ul>
 </div>

@@ -52,9 +52,9 @@
                         <h2 style="margin-left: 20px; margin-top: 20px; font-weight: 700; color: rgb(60,60,60);">Pages</h2>
                         <li><a href="{% url 'home' %}">Home</a></li>
                         <li><a href="{% url 'books' %}">Bookshelves</a>
-                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=1 page=1 %}">Finished</a></li>
-                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=2 page=1 %}">Currently Reading</a></li>
-                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=3 page=1 %}">To Read</a></li>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Finished</a></li>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=2 page=1 sort='finish_date' %}">Currently Reading</a></li>
+                            <li>&emsp;&mdash;&ensp; <a href="{% url 'shelf' id=3 page=1 sort='finish_date' %}">To Read</a></li>
                         </li>
                         <li><a href="{% url 'stats' %}">Statistics</a></li>
                     </ul>

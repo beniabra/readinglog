@@ -8,7 +8,7 @@
         {% for shelf in shelves %}
         <div class="panel panel-default">
             <div class="panel-body">
-                <h4><a href="{% url 'shelf' id=shelf.id page=1 %}">{{shelf.name}} </a><span class="badge">{{shelf.book_set.all.count}}</span></h4>
+                <h4><a href="{% url 'shelf' id=shelf.id page=1 sort='finish_date' %}">{{shelf.name}} </a><span class="badge">{{shelf.book_set.all.count}}</span></h4>
                 {% for book in shelf.book_set.all|slice:":4" %}
                 <div class="col-sm-3 text-center">
                     {% with data=book.id|extract_data %}

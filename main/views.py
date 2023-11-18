@@ -198,14 +198,26 @@ def books(response):
     shelves = Bookshelf.objects.all()
     return render(response, "main/books.html", {"shelves": shelves})
 
-def shelf(response, id, page):
+def shelf(response, id, page, sort):
     s = Bookshelf.objects.get(id=id)
     num = 15
     pages = int(s.book_set.count() / num)
     if s.book_set.count() % num > 0:
         pages += 1
     s_id = id
-    return render(response, "main/shelf.html", {"shelf": s, "shelf_id": s_id, "pages": range(pages), "currPage": page})
+    if sort == "title":
+        pass
+    elif sort == "author":
+        pass
+    elif sort == "rating":
+        pass
+    elif sort == "start_date":
+        books = s.book_set.all().order_by('start_date')
+    elif sort == "finish_date":
+        books = s.book_set.all().order_by('-finish_date')
+    else:
+        books = s.book_set.all()
+    return render(response, "main/shelf.html", {"shelf": s, "books": books, "shelf_id": s_id, "pages": range(pages), "currPage": page})
 
 def shelfSort(response, id, page, sort):
     pass
