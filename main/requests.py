@@ -21,3 +21,11 @@ def setTitleAndAuthor(id):
     b.author = author
     b.save()
     return {"title": title, "authors": authors}
+
+if __name__=="__main__": 
+    books = Book.objects.all()
+    for book in books:
+        data = setTitleAndAuthor(book.id)
+        book.author = data['authors']
+        book.title = data['title']
+        book.save()

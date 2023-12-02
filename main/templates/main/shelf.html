@@ -10,12 +10,12 @@
       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort By
       <span class="caret"></span></button>
       <ul class="dropdown-menu">
-        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Title</a></li>
-        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Author</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='title' %}">Title</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='author' %}">Author</a></li>
         {% if shelf.name == "Finished" %}
-        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Rating</a></li>
-        <li><a href="{% url 'shelf' id=1 page=1 sort='start_date' %}">Start Date</a></li>
-        <li><a href="{% url 'shelf' id=1 page=1 sort='finish_date' %}">Finish Date</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='rating' %}">Rating</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='start_date' %}">Start Date</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='finish_date' %}">Finish Date</a></li>
         {% endif %}
       </ul>
     </div></div>
@@ -88,7 +88,7 @@
     {% endfor %}
     <ul class="pagination">
       {% for page in pages %}
-      <li {% if forloop.counter == currPage %} class="active" {% endif %}><a href="{% url 'shelf' id=shelf.id page=forloop.counter sort='finish_date' %}">{{forloop.counter}}</a></li>
+      <li {% if forloop.counter == currPage %} class="active" {% endif %}><a href="{% url 'shelf' id=shelf.id page=forloop.counter sort=sort %}">{{forloop.counter}}</a></li>
       {% endfor %}
     </ul>
 </div>

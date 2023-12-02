@@ -116,6 +116,7 @@ def changeBookshelf(response, id):
     if response.method == "POST":
         if not Book.objects.filter(id=id).exists():
             Book.objects.create(id=id)
+            setTitleAndAuthor(id)
         b = Book.objects.get(id=id)
         if response.POST.get("start"):
             return redirect(start, id=id)
@@ -208,18 +209,18 @@ def shelf(response, id, page, sort):
         pages += 1
     s_id = id
     if sort == "title":
-        pass
+        books = s.book_set.all().order_by('title')
     elif sort == "author":
-        pass
+        books = s.book_set.all().order_by('author')
     elif sort == "rating":
-        pass
+        books = s.book_set.all().order_by('-rating')
     elif sort == "start_date":
         books = s.book_set.all().order_by('start_date')
     elif sort == "finish_date":
         books = s.book_set.all().order_by('-finish_date')
     else:
         books = s.book_set.all()
-    return render(response, "main/shelf.html", {"shelf": s, "books": books, "shelf_id": s_id, "pages": range(pages), "currPage": page})
+    return render(response, "main/shelf.html", {"shelf": s, "books": books, "shelf_id": s_id, "pages": range(pages), "currPage": page, "sort": sort})
 
 def shelfSort(response, id, page, sort):
     pass
