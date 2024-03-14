@@ -9,7 +9,7 @@
         <div class="modal fade" id="newShelf" role="dialog">
             <div class="modal-dialog">
               <div class="modal-content">
-                <!-- <form method="post" style="margin: 0px" action="changeBookshelf/{{book.id}}"> -->
+                <form method="post" style="margin: 0px" action="../newBookshelf">
                   {% csrf_token %}
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -18,28 +18,20 @@
                   <div class="modal-body">
                     <div class="form-group">
                         <label for="usr">Name:</label>
-                        <input type="text" class="form-control" id="name">
+                        <input type="text" class="form-control" name="Name">
                     </div>
                     <h5><b>Choose some books to start off...</b></h5>
-                    <div class="row">
-                        <div class="col-sm-4">
-                            <input type="checkbox" id="book-1" />
-                            <label for="book-1">
-                                <img src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
-                            </label>
+                    <div class="row" style="overflow-y: auto;">
+                        {% for book in books|slice:":12" %}
+                        <div class="col-sm-4" style="height: 260px;">
+                          {% with data=book.id|extract_data %}
+                          <div class="checkbox">
+                            <label><input type="checkbox" value="{{book.id}}" id="{{book.id}}" name="Books"><img src="{{data.image}}" alt="thumbnail" style="max-height: 196px; max-width: 128px;"><br>{{book.title}}</label>
+                          </div>
+                          {% endwith %}
                         </div>
-                        <div class="col-sm-4">
-                            <input type="checkbox" id="book-2" />
-                            <label for="book-2">
-                                <img src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
-                            </label>
-                        </div>
-                        <div class="col-sm-4">
-                            <input type="checkbox" id="book-3" />
-                            <label for="book-3">
-                                <img src="https://islandpress.org/sites/default/files/default_book_cover_2015.jpg" alt="thumbnail" style="max-height: 196px; max-width: 128px;">
-                            </label>
-                        </div>
+                        
+                        {% endfor %}
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -47,7 +39,7 @@
                     <button type="submit" class="btn btn-danger" name="add" value="add">Add</button>
 
                   </div>
-                <!-- </form> -->
+                </form>
               </div>
             </div>
           </div>

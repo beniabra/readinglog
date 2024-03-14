@@ -111,6 +111,23 @@ def addToBookshelf(response, id):
         else:
             s.book_set.add(b)
     return redirect(view_book, id=id)
+
+def newBookshelf(response):
+    if response.method == "POST":
+        print(response.POST)
+        if response.POST.get("Name") and not Bookshelf.objects.filter(name=response.POST.get("Name")):
+            Bookshelf.objects.create(name=response.POST.get("Name"))
+            new_id = Bookshelf.objects.get(name=response.POST.get("Name")).id
+            if response.POST.get("Books"):
+                s = Bookshelf.objects.get(id=new_id)
+                for b_id in response.POST.getlist("Books"):
+                    print(b_id)
+                    if Book.objects.filter(id=b_id).exists():
+                        book = Book.objects.get(id=b_id)
+                        s.book_set.add(book)
+                s.save()
+            return redirect(shelf,id=new_id, page=1, sort='finish_date')
+    return redirect(books)
     
 def changeBookshelf(response, id):
     if response.method == "POST":
@@ -132,7 +149,7 @@ def removeBook(response, shelf_id, book_id):
         b = Book.objects.get(id=book_id)
         s.book_set.remove(b)
         s.save()
-    return redirect(shelf,id=shelf_id, page=1)
+    return redirect(shelf,id=shelf_id, page=1, sort='finish_date')
 
 def start(response, id):
     book = Book.objects.get(id=id)
@@ -199,7 +216,8 @@ def dnf(response, id):
 
 def books(response):
     shelves = Bookshelf.objects.all()
-    return render(response, "main/books.html", {"shelves": shelves})
+    books = Book.objects.all()
+    return render(response, "main/books.html", {"shelves": shelves, "books": books})
 
 def shelf(response, id, page, sort):
     s = Bookshelf.objects.get(id=id)

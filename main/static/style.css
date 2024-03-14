@@ -78,24 +78,3 @@ body{
       content: '- Show Less';
   }
 
-
-  input[type="checkbox"] {
-    position: relative;
-    width: 100%;
-    cursor: pointer;
-  }
-  input[type="checkbox"]:after {
-    position: absolute;
-    font-family: "Font Awesome 5 Free";
-    font-weight: 400;
-    content: "\f111";
-    font-size: 18px;
-    color: #478bfb;
-    right: 10px;
-    top: -5px;
-  }
-  input[type="checkbox"]:checked:after {
-    font-weight: 900;
-    content: "\f058";
-    color: #478bfb;
-  }
