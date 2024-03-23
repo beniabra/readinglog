@@ -4,6 +4,7 @@ from django.urls import reverse
 class Bookshelf(models.Model):
     name = models.CharField(max_length=50)
     date_created = models.DateField(auto_now=False, auto_now_add=True)
+    editable = models.BooleanField(default=False, blank=True)
 
     class Meta:
         ordering = ['date_created']

@@ -13,11 +13,31 @@
         <h1><b>{{ data.title }}</b></h1> 
         <h1 style="margin-top: 10px;"><small>{{ data.authors }}</small></h1>
         {% if added %}
+        <div class="col-lg-6">
             {% for bookshelf in bookshelves %}                 
             <span style='padding: 5px; margin-right: 5px; font-size: small;' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
                 <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
             </span>
             {% endfor %}
+        </div>
+        <div class="col-lg-6">
+            <form method="post" style="margin: 0px" action="../addToBookshelf/{{book.id}}">
+                {% csrf_token %}
+                <div class="form-group">                        
+                    <div>
+                      <select id="bookshelf" class="form-control" name="bookshelf">
+                        <option selected>...</option>
+                        {% for shelf in custom_bookshelves %}
+                            {% if shelf not in bookshelves %}
+                            <option value="{{shelf.id}}">{{shelf.name}}</option>
+                            {% endif %}
+                        {% endfor %}
+                      </select> 
+                    </div>
+                </div>
+                <button class="btn btn-primary" name="add", value="add" type="submit">Add To Bookshelf</button>                    
+            </form>
+        </div>
         {% endif %}
         <p style="padding-top: 10px;"><b>Published:</b> {{ data.pub_date }}</p>
         <p><b>Publisher:</b> {{ data.publisher }}</p>

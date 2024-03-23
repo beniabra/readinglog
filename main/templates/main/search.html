@@ -18,15 +18,15 @@
                 <p>{{data.authors}}</p> 
                 <div class="col-lg-8">
                 {% if result.id in book_ids %} 
-                        {% for book in all_books %}
-                            {% if book.id == result.id %}
-                                {% for bookshelf in book.bookshelf.all %}
-                                <span style='padding: 5px; margin-right: 5px; font-size: small;' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
-                                    <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
-                                </span>
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
+                    {% for book in all_books %}
+                        {% if book.id == result.id %}
+                            {% for bookshelf in book.bookshelf.all %}
+                            <span style='padding: 5px; margin-right: 5px; font-size: small;' class="label label-{% if bookshelf|stringformat:'s' == 'Finished' %}success{% elif bookshelf|stringformat:'s' == 'Currently Reading' %}warning{% elif bookshelf|stringformat:'s' == 'To Read' %}info{% elif bookshelf|stringformat:'s' == 'Did Not Finish' %}danger{% else %}primary{% endif %}">
+                                <span class="glyphicon glyphicon-book"></span> {{ bookshelf.name }}
+                            </span>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                 {% else %}
                 </div>
                 <div class="col-lg-4">

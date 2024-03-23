@@ -12,11 +12,9 @@
       <ul class="dropdown-menu">
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='title' %}">Title</a></li>
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='author' %}">Author</a></li>
-        {% if shelf.name == "Finished" %}
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='rating' %}">Rating</a></li>
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='start_date' %}">Start Date</a></li>
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='finish_date' %}">Finish Date</a></li>
-        {% endif %}
       </ul>
     </div></div>
     {% for book in books|paginate:currPage %} 
