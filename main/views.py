@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, redirect
 from .models import Bookshelf, Book
 from .forms import EditDetails
@@ -7,7 +8,8 @@ import requests
 
 
 def home(response):
-    f = Bookshelf.objects.get(name="Finished").book_set.all().count()
+    this_year = datetime.datetime.now().year
+    f = Book.objects.filter(bookshelf__name="Finished", finish_date__year=this_year).count()
     results = {
         "books_finished": f,
         "book_goal": 50,
@@ -59,7 +61,7 @@ def view_book(response, id):
         book = None
         added = False
         bookshelves = None
-    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book, "bookshelves": bookshelves})
+    return render(response, "main/view.html", {"added": added, "book_id": id, "book": book, "bookshelves": bookshelves, "custom_bookshelves": Bookshelf.objects.filter(editable=True)})
 
 def editDetails(response, id):
     book = Book.objects.get(id=id)
@@ -116,7 +118,7 @@ def newBookshelf(response):
     if response.method == "POST":
         print(response.POST)
         if response.POST.get("Name") and not Bookshelf.objects.filter(name=response.POST.get("Name")):
-            Bookshelf.objects.create(name=response.POST.get("Name"))
+            Bookshelf.objects.create(name=response.POST.get("Name"), editable=True)
             new_id = Bookshelf.objects.get(name=response.POST.get("Name")).id
             if response.POST.get("Books"):
                 s = Bookshelf.objects.get(id=new_id)
