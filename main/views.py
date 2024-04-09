@@ -96,6 +96,14 @@ def editLikesDislikes(response, id):
         b.save()
     return redirect(view_book, id=id)
 
+def editNotes(response, id):
+    if response.method == "POST":
+        print(response.POST)
+        b = Book.objects.get(id=id)
+        b.notes = response.POST.get('notes')
+        b.save()
+    return redirect(view_book, id=id)
+
 def addToBookshelf(response, id):
     if response.method == "POST":
         print(response.POST)

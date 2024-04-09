@@ -166,7 +166,7 @@
         {% endif %}
     </div>
     <div class="row">
-        <div class="container">
+        <div>
         {% if book.finished %}
             <p><b>My rating:</b></p>
             <h1>
@@ -216,6 +216,29 @@
             </div>
             
         {% endif %} 
+        {% if added %}
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <div class="well" style="background-color: whitesmoke;" data-toggle="modal" data-target="#notes">{{ book.notes|linebreaks }}</div>
+            <div class="modal fade" id="notes" role="dialog">
+                <div class="modal-dialog" style="width:1000px">
+                  <div class="modal-content">
+                    <form method="post" action="../editNotes/{{book.id}}">
+                        {% csrf_token %}
+                    <div class="modal-body">
+                        <label>Notes:</label>
+                        <textarea class="form-control" rows="5" name="notes">{{book.notes}}</textarea>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button type="submit" name="notesButton" class="btn btn-default">Save</button>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
         </div>
     </div>
     {% endif %}

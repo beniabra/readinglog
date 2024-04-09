@@ -18,5 +18,6 @@ urlpatterns = [
     path('editLikesDislikes/<str:id>', views.editLikesDislikes, name="editLikesDislikes"),
     path('removeBook/<int:shelf_id>/<str:book_id>', views.removeBook, name="removeBook"),
     path('editRating/<str:id>', views.editRating, name="editRating"),
-    path('newBookshelf', views.newBookshelf, name="newBookshelf")
+    path('newBookshelf', views.newBookshelf, name="newBookshelf"),
+    path('editNotes/<str:id>', views.editNotes, name="editNotes"),
 ]
