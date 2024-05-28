@@ -1,10 +1,12 @@
 {% extends 'main/base.html' %}
 {% load extract %}
+{% load static %}
 {% block title %}{{shelf.name}}{% endblock %}
 {% block header %}{% endblock %}
 {% block content %}
 <div class="row">
     <h3>{{shelf.name}} <small> ({{books.count}})</small></h3>
+    
     <div class="row" style="margin-right: 10px;">
     <div class="dropdown pull-right" style="padding-bottom: 10px;">
       <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Sort By
@@ -34,11 +36,19 @@
               </form>
             {% endif %}
             {% if book.finished %}
-            <span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <!-- <span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
             <span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
             <span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-            <span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-            <span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+            <span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span> -->
+              {% if book.rating >= 1.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
+              {% if book.rating >= 2 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
+              {% if book.rating >= 2.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
+              {% if book.rating >= 3 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
+              {% if book.rating >= 3.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
+              {% if book.rating >= 4 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
+              {% if book.rating >= 4.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
+              {% if book.rating >= 5 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
+
             {% endif %}
             {% if book.started and not book.finished %}
             <div class="progress" style="height: 10px; margin-bottom: 0px">

@@ -78,3 +78,8 @@ body{
       content: '- Show Less';
   }
 
+  .star {
+    width: 15;
+    height: 20;
+    margin-left: -4px;
+  }
