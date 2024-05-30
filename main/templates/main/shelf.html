@@ -17,6 +17,7 @@
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='rating' %}">Rating</a></li>
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='start_date' %}">Start Date</a></li>
         <li><a href="{% url 'shelf' id=shelf.id page=1 sort='finish_date' %}">Finish Date</a></li>
+        <li><a href="{% url 'shelf' id=shelf.id page=1 sort='reading_time' %}">Reading Time</a></li>
       </ul>
     </div></div>
     {% for book in books|paginate:currPage %} 

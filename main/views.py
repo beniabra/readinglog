@@ -1,10 +1,11 @@
 import datetime
 from django.shortcuts import render, redirect
 from .models import Bookshelf, Book
-from .forms import EditDetails
 from .requests import setTitleAndAuthor
 from datetime import date
+from django.db.models import F, ExpressionWrapper, DurationField
 import requests
+
 
 
 def home(response):
@@ -246,6 +247,10 @@ def shelf(response, id, page, sort):
         books = s.book_set.all().order_by('start_date')
     elif sort == "finish_date":
         books = s.book_set.all().order_by('-finish_date')
+    elif sort == "reading_time":
+        books = s.book_set.all().annotate(
+            reading_duration = ExpressionWrapper(F('finish_date') - F('start_date'), output_field = DurationField())
+        ).order_by('reading_duration')
     else:
         books = s.book_set.all()
     return render(response, "main/shelf.html", {"shelf": s, "books": books, "shelf_id": s_id, "pages": range(pages), "currPage": page, "sort": sort})
