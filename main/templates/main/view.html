@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load extract %}
+{% load static %}
 
 
 {% block title %}{% with data=book_id|extract_data %}{{ data.title }}{% endwith %}{% endblock %}
@@ -172,11 +173,16 @@
             <h1>
                 <form method="post" action="{% url 'editRating' book.id %}"> 
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="1"><span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
-                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="2"><span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
-                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="3"><span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
-                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="4"><span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
-                    <button type="submit" class="btn btn-default btn-lg" style="border: 0; padding: 0;" name="rating" value="5"><span class="glyphicon {% if book.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span></button>
+                    <button type="submit" class="starSet" name="rating" value="0.5"><img class="star" {% if book.rating >= 0.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="1"><img class="star" {% if book.rating >= 1 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="1.5"><img class="star" {% if book.rating >= 1.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="2"><img class="star" {% if book.rating >= 2 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="2.5"><img class="star" {% if book.rating >= 2.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="3"><img class="star" {% if book.rating >= 3 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="3.5"><img class="star" {% if book.rating >= 3.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="4"><img class="star" {% if book.rating >= 4 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="4.5"><img class="star" {% if book.rating >= 4.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}></button>
+                    <button type="submit" class="starSet" name="rating" value="5"><img class="star" {% if book.rating >= 5 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}></button>
                 </form>
             </h1>
             <div class="row">

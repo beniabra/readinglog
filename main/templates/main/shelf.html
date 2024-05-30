@@ -36,18 +36,16 @@
               </form>
             {% endif %}
             {% if book.finished %}
-            <!-- <span class="glyphicon {% if book.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-            <span class="glyphicon {% if book.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-            <span class="glyphicon {% if book.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-            <span class="glyphicon {% if book.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span> -->
-              {% if book.rating >= 1.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
-              {% if book.rating >= 2 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
-              {% if book.rating >= 2.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
-              {% if book.rating >= 3 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
-              {% if book.rating >= 3.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
-              {% if book.rating >= 4 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
-              {% if book.rating >= 4.5 %} <img class="star" src="{% static 'images/starLeft.jpg' %}"> {% endif %}
-              {% if book.rating >= 5 %} <img class="star" src="{% static 'images/starRight.jpg' %}"> {% endif %}
+               <img class="star" {% if book.rating >= 0.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 1 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 1.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 2 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 2.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 3 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 3.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 4 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 4.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+               <img class="star" {% if book.rating >= 5 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}> 
 
             {% endif %}
             {% if book.started and not book.finished %}

@@ -1,5 +1,6 @@
 {% extends 'main/base.html' %}
 {% load extract %}
+{% load static %}
 
 {% block title %}Home{% endblock %}
 {% block header %}Reading Log{% endblock %}
@@ -30,11 +31,16 @@
               <h3><b><a href="{% url 'view' recently_finished.id %}">{{data.title}}</a></b></h3> 
               <p>{{data.authors}}</p>
               {% if recently_finished.finished %}
-                <span class="glyphicon {% if recently_finished.rating >= 1 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if recently_finished.rating >= 2 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if recently_finished.rating >= 3 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if recently_finished.rating >= 4 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
-                <span class="glyphicon {% if recently_finished.rating >= 5 %}glyphicon glyphicon-star{% else %}glyphicon glyphicon-star-empty{% endif %} text-warning"></span>
+                <img class="star" {% if recently_finished.rating >= 0.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 1 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 1.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 2 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 2.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 3 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 3.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 4 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 4.5 %} src="{% static 'images/starLeft.jpg' %}" {% else %} src="{% static 'images/starEmptyLeft.jpg' %}"{% endif %}>
+                <img class="star" {% if recently_finished.rating >= 5 %} src="{% static 'images/starRight.jpg' %}" {% else %} src="{% static 'images/starEmptyRight.jpg' %}"{% endif %}> 
               {% endif %}
             </div>
             
